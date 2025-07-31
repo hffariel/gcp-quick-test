@@ -7,11 +7,11 @@ output "celerdata_created_vm_service_account" {
 }
 
 output "celerdata_created_network" {
-  value = google_compute_network.celerdata_created_network.self_link
+  value = google_compute_network.celerdata_created_network.id
 }
 
 output "celerdata_created_subnetwork" {
-  value = google_compute_subnetwork.celerdata_created_subnetwork.self_link
+  value = google_compute_subnetwork.celerdata_created_subnetwork.id
 }
 
 output "celerdata_used_cluster_network_tag" {

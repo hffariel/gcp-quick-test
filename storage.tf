@@ -1,6 +1,6 @@
 
 resource "google_storage_bucket" "celerdata_created_data_bucket" {
-  project       = var.project_id
+  project       = data.google_project.project.number
   name          = "${local.celerdata_created_resource_common_prefix}-data-bucket"
   location      = var.region
   storage_class = "REGIONAL"
