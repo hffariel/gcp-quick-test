@@ -3,7 +3,7 @@ provider "google" {
   terraform_attribution_label_addition_strategy = "CREATION_ONLY"
   
   default_labels = {
-    celerdata_cluster_name = local.celerdata_cluster_name
+    celerdata_cluster_name = var.celerdata_cluster_name
   }
 }
 
