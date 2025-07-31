@@ -1,8 +1,8 @@
 
 resource "google_project_iam_custom_role" "celerdata_created_vm_data_role" {
   project     = var.project_id
-  role_id     = "${local.celerdata_created_resource_common_prefix}-vm-data-role-id"
-  title       = "${local.celerdata_created_resource_common_prefix}-vm-data-role"
+  role_id     = "${replace(local.celerdata_created_resource_common_prefix, "-", "_")}_vm_data_role_id"
+  title       = "${replace(local.celerdata_created_resource_common_prefix, "-", "_")}_vm_data_role"
   permissions = ["iam.serviceAccounts.signBlob", "storage.buckets.get", "storage.buckets.update", "storage.objects.create", "storage.objects.delete", "storage.objects.get", "storage.objects.list", "storage.objects.update"]
   description = "The cloud storage data role created by celerdata"
 
@@ -34,8 +34,8 @@ resource "google_project_iam_member" "celerdata_created_vm_service_account_bindi
 
 resource "google_project_iam_custom_role" "celerdata_created_deployment_extra_role" {
   project     = var.project_id
-  role_id     = "${local.celerdata_created_resource_common_prefix}-deployment-role-id"
-  title       = "${local.celerdata_created_resource_common_prefix}-deployment-role"
+  role_id     = "${replace(local.celerdata_created_resource_common_prefix, "-", "_")}_deployment_role_id"
+  title       = "${replace(local.celerdata_created_resource_common_prefix, "-", "_")}_deployment_role"
   permissions = ["iam.serviceAccounts.actAs", "storage.buckets.get"]
   description = "The cluster deployment role created by celerdata"
 
