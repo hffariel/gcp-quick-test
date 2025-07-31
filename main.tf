@@ -3,7 +3,7 @@ provider "google" {
   region  = var.region
 }
 
-resource "google_project_services" "celerdata_enabled_services" {
+resource "google_project_service" "celerdata_enabled_services" {
   project = var.project_id
 
   services = [
