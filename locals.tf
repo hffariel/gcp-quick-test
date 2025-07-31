@@ -6,7 +6,7 @@ resource "random_string" "celerdata_recource_suffix" {
 }
 
 locals {
-  celerdata_created_resource_common_prefix = "celerdata-${var.celerdata_cluster_name}-${random_string.celerdata_recource_suffix.result}"
+  celerdata_created_resource_common_prefix = "cd-${var.celerdata_cluster_name}-${random_string.celerdata_recource_suffix.result}"
 }
 
 locals {

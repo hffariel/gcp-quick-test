@@ -13,7 +13,7 @@ resource "google_project_iam_custom_role" "celerdata_created_vm_data_role" {
 
 resource "google_service_account" "celerdata_created_vm_service_account" {
   project      = data.google_project.project.number
-  account_id   = "${local.celerdata_created_resource_common_prefix}-vm-sa-id"
+  account_id   = "${local.celerdata_created_resource_common_prefix}"
   display_name = "${local.celerdata_created_resource_common_prefix}-vm-sa"
   description  = "The service account bound with VMs created by celerdata."
 
@@ -34,7 +34,7 @@ resource "google_project_iam_member" "celerdata_created_vm_service_account_bindi
 
 resource "google_project_iam_custom_role" "celerdata_created_deployment_extra_role" {
   project     = data.google_project.project.number
-  role_id     = "${replace(local.celerdata_created_resource_common_prefix, "-", "_")}_deployment_role_id"
+  role_id     = "${replace(local.celerdata_created_resource_common_prefix, "-", "_")}"
   title       = "${replace(local.celerdata_created_resource_common_prefix, "-", "_")}_deployment_role"
   permissions = ["iam.serviceAccounts.actAs", "storage.buckets.get"]
   description = "The cluster deployment role created by celerdata"
