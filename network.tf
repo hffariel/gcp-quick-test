@@ -1,6 +1,5 @@
 
 resource "google_compute_network" "celerdata_created_network" {
-  project                 = data.google_client_config.current.project
   name                    = "${local.celerdata_created_resource_common_prefix}-network"
   auto_create_subnetworks = false
   routing_mode            = "REGIONAL"
@@ -12,7 +11,6 @@ resource "google_compute_network" "celerdata_created_network" {
 }
 
 resource "google_compute_subnetwork" "celerdata_created_subnetwork" {
-  project                  = data.google_client_config.current.project
   region                   = var.region
   name                     = "${local.celerdata_created_resource_common_prefix}-subnetwork"
   ip_cidr_range            = local.celerdata_created_subnet_cird
@@ -26,7 +24,6 @@ resource "google_compute_subnetwork" "celerdata_created_subnetwork" {
 }
 
 resource "google_compute_firewall" "celerdata_created_firewall_rule_allow_internal_ingress" {
-  project         = data.google_client_config.current.project
   name            = "${local.celerdata_created_resource_common_prefix}-allow-internal-ingress"
   network         = google_compute_network.celerdata_created_network.self_link
   direction       = "INGRESS"
@@ -45,7 +42,6 @@ resource "google_compute_firewall" "celerdata_created_firewall_rule_allow_intern
 }
 
 resource "google_compute_firewall" "celerdata_created_firewall_rule_allow_internal_egress" {
-  project              = data.google_client_config.current.project
   name                 = "${local.celerdata_created_resource_common_prefix}-allow-internal-egress"
   network              = google_compute_network.celerdata_created_network.self_link
   direction            = "EGRESS"
@@ -64,7 +60,6 @@ resource "google_compute_firewall" "celerdata_created_firewall_rule_allow_intern
 }
 
 resource "google_compute_firewall" "celerdata_created_firewall_rule_allow_external_egress" {
-  project              = data.google_client_config.current.project
   name                 = "${local.celerdata_created_resource_common_prefix}-allow-external-egress"
   network              = google_compute_network.celerdata_created_network.self_link
   direction            = "EGRESS"
@@ -84,7 +79,6 @@ resource "google_compute_firewall" "celerdata_created_firewall_rule_allow_extern
 }
 
 resource "google_compute_firewall" "celerdata_created_firewall_rule_deny_external_ingress" {
-  project              = data.google_client_config.current.project
   name                 = "${local.celerdata_created_resource_common_prefix}-deny-external-ingress"
   network              = google_compute_network.celerdata_created_network.self_link
   direction            = "INGRESS"
@@ -103,7 +97,6 @@ resource "google_compute_firewall" "celerdata_created_firewall_rule_deny_externa
 }
 
 resource "google_compute_route" "default_internet_route" {
-  project              = data.google_client_config.current.project
   name                 = "${local.celerdata_created_resource_common_prefix}-default-internet-route"
   dest_range           = "0.0.0.0/0"
   network              = google_compute_network.celerdata_created_network.self_link
