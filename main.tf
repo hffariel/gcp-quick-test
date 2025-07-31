@@ -5,14 +5,7 @@ provider "google" {
 
 resource "google_project_service" "celerdata_enabled_services" {
   project = var.project_id
-
-  services = [
-    "compute.googleapis.com",
-    "storage.googleapis.com",
-    "logging.googleapis.com",
-    "cloudresourcemanager.googleapis.com",
-    "iam.googleapis.com",
-    "serviceusage.googleapis.com"
-  ]
+  for_each = toset(local.celerdata_required_gcp_services)
+  service = each.value
   disable_on_destroy = false
 }
