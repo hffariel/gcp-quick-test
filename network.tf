@@ -51,7 +51,7 @@ resource "google_compute_firewall" "celerdata_created_firewall_rule_allow_intern
   direction            = "EGRESS"
   priority             = 10
   destination_ranges   = [local.celerdata_created_subnet_cird]
-  source_tags          = [local.celerdata_cluster_network_tag]
+  target_tags          = [local.celerdata_cluster_network_tag]
   description          = "The rule for allowing internal traffic to celerdata managed resources."
 
   allow {
@@ -70,7 +70,7 @@ resource "google_compute_firewall" "celerdata_created_firewall_rule_allow_extern
   direction            = "EGRESS"
   priority             = 10
   destination_ranges   = ["0.0.0.0/0"]
-  source_tags          = [local.celerdata_cluster_network_tag]
+  target_tags          = [local.celerdata_cluster_network_tag]
   description          = "The rule for allowing external traffic to celerdata cloud services."
 
   allow {
