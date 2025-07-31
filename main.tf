@@ -1,5 +1,6 @@
 provider "google" {
-  project_id = data.google_client_config.current.project
+  project = data.google_client_config.current.project
+  region  = data.google_client_config.current.region
 }
 
 data "google_client_config" "current" {
