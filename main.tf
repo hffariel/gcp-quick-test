@@ -7,6 +7,9 @@ provider "google" {
   }
 }
 
+data "google_project" "project" {
+}
+
 resource "google_project_service" "celerdata_enabled_services" {
   for_each           = toset(local.celerdata_required_gcp_services)
   service            = each.value
