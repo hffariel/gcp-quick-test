@@ -37,7 +37,6 @@ resource "google_compute_firewall" "celerdata_created_firewall_rule_allow_intern
 
   allow {
     protocol = "all"
-    ports = ["0-65535"]
   }
 
   depends_on = [
@@ -57,7 +56,6 @@ resource "google_compute_firewall" "celerdata_created_firewall_rule_allow_intern
 
   allow {
     protocol = "all"
-    ports = ["0-65535"]
   }
 
   depends_on = [
@@ -97,7 +95,6 @@ resource "google_compute_firewall" "celerdata_created_firewall_rule_deny_externa
 
   deny {
     protocol = "all"
-    ports = ["0-65535"]
   }
 
   depends_on = [
