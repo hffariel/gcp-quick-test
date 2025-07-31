@@ -1,6 +1,6 @@
 provider "google" {
   project = var.project_id
-  region  = var.gcp_region
+  region  = var.region
 }
 
 resource "google_project_services" "celerdata_enabled_services" {
