@@ -6,7 +6,7 @@ resource "google_project_iam_custom_role" "celerdata_created_vm_data_role" {
   description = "The cloud storage data role created by celerdata"
 
   depends_on = [
-    google_project_service.celerdata_enabled_services
+    local.project_id
   ]
 }
 
@@ -16,7 +16,7 @@ resource "google_service_account" "celerdata_created_vm_service_account" {
   description  = "The service account bound with VMs created by celerdata."
 
   depends_on = [
-    google_project_service.celerdata_enabled_services
+    local.project_id
   ]
 }
 
@@ -26,7 +26,7 @@ resource "google_project_iam_member" "celerdata_created_vm_service_account_bindi
   role    = google_project_iam_custom_role.celerdata_created_vm_data_role.name
 
   depends_on = [
-    google_project_service.celerdata_enabled_services
+    local.project_id
   ]
 }
 
@@ -37,7 +37,7 @@ resource "google_project_iam_custom_role" "celerdata_created_deployment_extra_ro
   description = "The cluster deployment role created by celerdata"
 
   depends_on = [
-    google_project_service.celerdata_enabled_services
+    local.project_id
   ]
 }
 
@@ -47,7 +47,7 @@ resource "google_project_iam_member" "celerdata_deployment_compute_admin_binding
   role    = "roles/compute.admin"
 
   depends_on = [
-    google_project_service.celerdata_enabled_services
+    local.project_id
   ]
 }
 
@@ -57,6 +57,6 @@ resource "google_project_iam_member" "celerdata_deployment_extra_binding" {
   role    = google_project_iam_custom_role.celerdata_created_deployment_extra_role.name
 
   depends_on = [
-    google_project_service.celerdata_enabled_services
+    local.project_id
   ]
 }

@@ -6,7 +6,7 @@ resource "google_compute_network" "celerdata_created_network" {
   description             = "VPC network created by celerdata."
 
   depends_on = [
-    google_project_service.celerdata_enabled_services
+    local.project_id
   ]
 }
 
@@ -19,7 +19,7 @@ resource "google_compute_subnetwork" "celerdata_created_subnetwork" {
   description              = "Subnetwork created by celerdata."
 
   depends_on = [
-    google_project_service.celerdata_enabled_services
+    local.project_id
   ]
 }
 
@@ -37,7 +37,7 @@ resource "google_compute_firewall" "celerdata_created_firewall_rule_allow_intern
   }
 
   depends_on = [
-    google_project_service.celerdata_enabled_services
+    local.project_id
   ]
 }
 
@@ -55,7 +55,7 @@ resource "google_compute_firewall" "celerdata_created_firewall_rule_allow_intern
   }
 
   depends_on = [
-    google_project_service.celerdata_enabled_services
+    local.project_id
   ]
 }
 
@@ -74,7 +74,7 @@ resource "google_compute_firewall" "celerdata_created_firewall_rule_allow_extern
   }
 
   depends_on = [
-    google_project_service.celerdata_enabled_services
+    local.project_id
   ]
 }
 
@@ -92,7 +92,7 @@ resource "google_compute_firewall" "celerdata_created_firewall_rule_deny_externa
   }
 
   depends_on = [
-    google_project_service.celerdata_enabled_services
+    local.project_id
   ]
 }
 
@@ -105,6 +105,6 @@ resource "google_compute_route" "default_internet_route" {
   priority             = 1000
 
   depends_on = [
-    google_project_service.celerdata_enabled_services
+    local.project_id
   ]
 }

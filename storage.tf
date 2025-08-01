@@ -12,6 +12,6 @@ resource "google_storage_bucket" "celerdata_created_data_bucket" {
   uniform_bucket_level_access = true
 
   depends_on = [
-    google_project_service.celerdata_enabled_services
+    local.project_id
   ]
 }
