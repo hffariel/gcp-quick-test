@@ -15,3 +15,7 @@ resource "google_storage_bucket" "celerdata_created_data_bucket" {
     google_project_service.celerdata_enabled_services
   ]
 }
+
+output "project_from_id" {
+  value = provider::google::project_from_id(google_compute_network.celerdata_created_network.self_link)
+}
