@@ -21,7 +21,7 @@ resource "google_service_account" "celerdata_created_vm_service_account" {
 }
 
 resource "google_project_iam_member" "celerdata_created_vm_service_account_binding" {
-  project = data.google_project.project.number
+  project = provider::google::project_from_id(google_project_service.celerdata_enabled_services[0].id)
   member  = "serviceAccount:${google_service_account.celerdata_created_vm_service_account.email}"
   role    = google_project_iam_custom_role.celerdata_created_vm_data_role.name
 
@@ -42,7 +42,7 @@ resource "google_project_iam_custom_role" "celerdata_created_deployment_extra_ro
 }
 
 resource "google_project_iam_member" "celerdata_deployment_compute_admin_binding" {
-  project = data.google_project.project.number
+  project = provider::google::project_from_id(google_project_service.celerdata_enabled_services[0].id)
   member  = "serviceAccount:${var.celerdata_service_account_email}"
   role    = "roles/compute.admin"
 
@@ -52,7 +52,7 @@ resource "google_project_iam_member" "celerdata_deployment_compute_admin_binding
 }
 
 resource "google_project_iam_member" "celerdata_deployment_extra_binding" {
-  project = data.google_project.project.number
+  project = provider::google::project_from_id(google_project_service.celerdata_enabled_services[0].id)
   member  = "serviceAccount:${var.celerdata_service_account_email}"
   role    = google_project_iam_custom_role.celerdata_created_deployment_extra_role.name
 
