@@ -1,5 +1,5 @@
-
 resource "google_storage_bucket" "celerdata_created_data_bucket" {
+  project       = local.project_id
   name          = "${local.celerdata_created_resource_common_prefix}-data-bucket"
   location      = var.region
   storage_class = "REGIONAL"
@@ -10,8 +10,4 @@ resource "google_storage_bucket" "celerdata_created_data_bucket" {
   }
 
   uniform_bucket_level_access = true
-
-  depends_on = [
-    local.project_id
-  ]
 }
