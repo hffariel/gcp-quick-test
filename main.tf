@@ -21,7 +21,8 @@ resource "google_project_service" "celerdata_enabled_services" {
 }
 
 locals {
-  project_id = split("/", google_project_service.celerdata_enabled_services[local.celerdata_required_gcp_services[0]].id)[0]
+  project_id                               = var.project_id != "" ? var.project_id : split("/", google_project_service.celerdata_enabled_services[local.celerdata_required_gcp_services[0]].id)[0]
+  region                                   = var.region != "" ? var.region : env("GOOGLE_REGION")
   celerdata_created_resource_common_prefix = "cd-${var.celerdata_cluster_name}-${random_string.celerdata_recource_suffix.result}"
 }
 
