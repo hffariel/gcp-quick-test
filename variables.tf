@@ -20,3 +20,13 @@ variable "celerdata_service_account_email" {
   type        = string
 }
 
+variable "celerdata_cloud_api_host" {
+  description = "The cloud api service host of CelerData"
+  type        = string
+  default     = "cloud-api.celerdata.com"
+}
+
+variable "celerdata_cloud_api_credential" {
+  description = "The temporary credentials used to create a celerdata cluster."
+  type        = string
+}

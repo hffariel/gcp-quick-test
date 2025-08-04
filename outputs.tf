@@ -17,3 +17,12 @@ output "celerdata_cluster_subnetwork" {
 output "celerdata_cluster_network_tag" {
   value = local.celerdata_cluster_network_tag
 }
+
+output "celerdata_cluster_initial_admin_password" {
+  value = random_password.celerdata_cluster_initial_admin_password.result
+  sensitive = true
+}
+
+output "celerdata_cluster_preview_address" {
+  value = "https://${var.celerdata_cloud_api_host}/add-cluster?oid=${local.order_id}&csp=${local.csp_id}" 
+}
