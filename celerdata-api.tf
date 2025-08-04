@@ -15,9 +15,7 @@ resource "time_static" "celerdata_save_credential_timestamp" {}
 data "http" "create_credential" {
   url    = "https://${var.celerdata_cloud_api_host}/api/quickstart/create-credential"
   method = "POST"
-
   request_body = local.create_credential_request_body
-
   request_headers = {
     "Content-Type"    = "application/json"
     "Accept-Language" = "en-us"
@@ -54,9 +52,7 @@ resource "time_static" "celerdata_save_network_timestamp" {}
 data "http" "create_network" {
   url    = "https://${var.celerdata_cloud_api_host}/api/quickstart/create-network"
   method = "POST"
-
   request_body = local.create_network_request_body
-
   request_headers = {
     "Content-Type"    = "application/json"
     "Accept-Language" = "en-us"
@@ -93,9 +89,7 @@ resource "time_static" "celerdata_save_storage_timestamp" {}
 data "http" "create_storage_config" {
   url    = "https://${var.celerdata_cloud_api_host}/api/quickstart/create-storage-config"
   method = "POST"
-
   request_body = local.create_storage_config_request_body
-
   request_headers = {
     "Content-Type"    = "application/json"
     "Accept-Language" = "en-us"
@@ -117,7 +111,7 @@ resource "random_password" "celerdata_cluster_initial_admin_password" {
   length           = 12
   upper            = true
   lower            = true
-  number           = true
+  numeric          = true
   special          = true
   override_special = "!@#$%^&*_"
   keepers = {
@@ -145,9 +139,7 @@ resource "time_static" "celerdata_save_cluster_timestamp" {}
 data "http" "deploy_cluster" {
   url    = "https://${var.celerdata_cloud_api_host}/api/quickstart/deploy-cluster"
   method = "POST"
-
   request_body = local.deploy_cluster_request_body
-
   request_headers = {
     "Content-Type"    = "application/json"
     "Accept-Language" = "en-us"
