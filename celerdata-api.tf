@@ -125,7 +125,6 @@ resource "random_password" "celerdata_cluster_initial_admin_password" {
   number           = true
   special          = true
   override_special = "!@#$%^&*_"
-  exclude          = "0oO1lI"
   keepers = {
     random_id = uuid()
   }
