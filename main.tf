@@ -1,5 +1,5 @@
 provider "google" {
-  projcet                                       = var.project_id
+  project                                       = var.project_id
   region                                        = var.region
   add_terraform_attribution_label               = true
   terraform_attribution_label_addition_strategy = "CREATION_ONLY"
