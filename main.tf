@@ -1,4 +1,6 @@
 provider "google" {
+  projcet                                       = var.project_id
+  region                                        = var.region
   add_terraform_attribution_label               = true
   terraform_attribution_label_addition_strategy = "CREATION_ONLY"
   
@@ -21,11 +23,7 @@ resource "google_project_service" "celerdata_enabled_services" {
 }
 
 locals {
-  project_id                               = var.project_id != "" ? var.project_id : split("/", google_project_service.celerdata_enabled_services[local.celerdata_required_gcp_services[0]].id)[0]
   celerdata_created_resource_common_prefix = "cd-${var.celerdata_cluster_name}-${random_string.celerdata_recource_suffix.result}"
-}
-
-locals {
   celerdata_created_subnet_cird   = "10.1.0.0/16"
   celerdata_cluster_network_tag   = "${local.celerdata_created_resource_common_prefix}-network-tag"
   celerdata_required_gcp_services = [

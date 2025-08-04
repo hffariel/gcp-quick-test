@@ -3,7 +3,7 @@ locals {
   create_credential_request_body = jsonencode({
     credential = {
       role_arn       = var.celerdata_service_account_email
-      external_id    = local.project_id
+      external_id    = var.project_id
     }
     quickStartUUID = local.sign_in.quickStartUUID
   })
