@@ -12,7 +12,8 @@ locals {
 
 resource "time_sleep" "wait_for_permissions_ready" {
   depends_on = [
-    google_project_iam_member.celerdata_deployment_role_binding
+    google_project_iam_member.celerdata_deployment_role_binding,
+    google_compute_subnetwork.celerdata_created_subnetwork
   ]
   create_duration = "60s"
 }
