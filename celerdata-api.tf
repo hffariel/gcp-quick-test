@@ -22,12 +22,12 @@ data "http" "create_credential" {
     "x-sr-ubid"       = local.sign_in.ubid
     "x-sr-token"      = local.sign_in.token
     "x-sr-nonce"      = random_uuid.celerdata_save_credential_nonce.result
-    "x-sr-timestamp"  = time_static.celerdata_save_credential_timestamp.unix
+    "x-sr-timestamp"  = time_static.celerdata_save_credential_timestamp.unix * 1000
     "x-sr-signature" = sha256(join("", [
       local.sign_in.ubid,
       local.sign_in.token,
       random_uuid.celerdata_save_credential_nonce.result,
-      time_static.celerdata_save_credential_timestamp.unix,
+      time_static.celerdata_save_credential_timestamp.unix * 1000,
       local.create_credential_request_body
     ]))
   }
@@ -59,12 +59,12 @@ data "http" "create_network" {
     "x-sr-ubid"       = local.sign_in.ubid
     "x-sr-token"      = local.sign_in.token
     "x-sr-nonce"      = random_uuid.celerdata_save_network_nonce.result
-    "x-sr-timestamp"  = time_static.celerdata_save_network_timestamp.unix
+    "x-sr-timestamp"  = time_static.celerdata_save_network_timestamp.unix * 1000
     "x-sr-signature" = sha256(join("", [
       local.sign_in.ubid,
       local.sign_in.token,
       random_uuid.celerdata_save_network_nonce.result,
-      time_static.celerdata_save_network_timestamp.unix,
+      time_static.celerdata_save_network_timestamp.unix * 1000,
       local.create_network_request_body
     ]))
   }
@@ -96,12 +96,12 @@ data "http" "create_storage_config" {
     "x-sr-ubid"       = local.sign_in.ubid
     "x-sr-token"      = local.sign_in.token
     "x-sr-nonce"      = random_uuid.celerdata_save_storage_nonce.result
-    "x-sr-timestamp"  = time_static.celerdata_save_storage_timestamp.unix
+    "x-sr-timestamp"  = time_static.celerdata_save_storage_timestamp.unix * 1000
     "x-sr-signature" = sha256(join("", [
       local.sign_in.ubid,
       local.sign_in.token,
       random_uuid.celerdata_save_storage_nonce.result,
-      time_static.celerdata_save_storage_timestamp.unix,
+      time_static.celerdata_save_storage_timestamp.unix * 1000,
       local.create_storage_config_request_body
     ]))
   }
@@ -146,12 +146,12 @@ data "http" "deploy_cluster" {
     "x-sr-ubid"       = local.sign_in.ubid
     "x-sr-token"      = local.sign_in.token
     "x-sr-nonce"      = random_uuid.celerdata_save_cluster_nonce.result
-    "x-sr-timestamp"  = time_static.celerdata_save_cluster_timestamp.unix
+    "x-sr-timestamp"  = time_static.celerdata_save_cluster_timestamp.unix * 1000
     "x-sr-signature" = sha256(join("", [
       local.sign_in.ubid,
       local.sign_in.token,
       random_uuid.celerdata_save_cluster_nonce.result,
-      time_static.celerdata_save_cluster_timestamp.unix,
+      time_static.celerdata_save_cluster_timestamp.unix * 1000,
       local.deploy_cluster_request_body
     ]))
   }
