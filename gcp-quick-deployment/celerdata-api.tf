@@ -10,6 +10,13 @@ locals {
   })
 }
 
+resource "time_sleep" "wait_for_permissions_ready" {
+  depends_on = [
+    google_project_iam_member.celerdata_deployment_role_binding
+  ]
+  create_duration = "60s"
+}
+
 resource "random_uuid" "celerdata_save_credential_nonce" {}
 resource "time_static" "celerdata_save_credential_timestamp" {
   triggers = {
@@ -36,6 +43,9 @@ data "http" "create_credential" {
       local.create_credential_request_body
     ]))
   }
+  depends_on = [
+    time_sleep.wait_for_permissions_ready
+  ]
 }
 
 locals {

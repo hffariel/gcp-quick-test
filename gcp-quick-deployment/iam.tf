@@ -74,6 +74,9 @@ locals {
     "compute.zones.get", "compute.zones.list",
     "compute.networks.get", "compute.networks.getEffectiveFirewalls", "compute.networks.getRegionEffectiveFirewalls", "compute.networks.list", "compute.networks.listPeeringRoutes", "compute.networks.use", "compute.networks.useExternalIp", 
     "compute.projects.get", 
+    "compute.zoneOperations.get",
+    "compute.regionOperations.get",
+    "compute.globalOperations.get",
     "iam.serviceAccounts.actAs", "storage.buckets.get"
   ]
 }
