@@ -6,7 +6,9 @@ resource "google_compute_network" "celerdata_created_network" {
   description             = "VPC network created by celerdata."
 
   depends_on = [
-    google_project_service.celerdata_enabled_services
+    google_project_service.celerdata_enabled_services,
+    google_project_iam_member.celerdata_deployment_compute_admin_binding,
+    google_project_iam_member.celerdata_deployment_extra_binding
   ]
 }
 
