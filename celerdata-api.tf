@@ -9,8 +9,16 @@ locals {
   })
 }
 
-resource "random_uuid" "celerdata_save_credential_nonce" {}
-resource "time_static" "celerdata_save_credential_timestamp" {}
+resource "random_uuid" "celerdata_save_credential_nonce" {
+  triggers = {
+    refresh = timestamp()
+  }
+}
+resource "time_static" "celerdata_save_credential_timestamp" {
+  triggers = {
+    refresh = timestamp()
+  }
+}
 
 data "http" "create_credential" {
   url    = "https://${var.celerdata_cloud_api_host}/api/quickstart/create-credential"
@@ -46,8 +54,16 @@ locals {
   })
 }
 
-resource "random_uuid" "celerdata_save_network_nonce" {}
-resource "time_static" "celerdata_save_network_timestamp" {}
+resource "random_uuid" "celerdata_save_network_nonce" {
+  triggers = {
+    refresh = timestamp()
+  }
+}
+resource "time_static" "celerdata_save_network_timestamp" {
+  triggers = {
+    refresh = timestamp()
+  }
+}
 
 data "http" "create_network" {
   url    = "https://${var.celerdata_cloud_api_host}/api/quickstart/create-network"
@@ -83,8 +99,16 @@ locals {
   })
 }
 
-resource "random_uuid" "celerdata_save_storage_nonce" {}
-resource "time_static" "celerdata_save_storage_timestamp" {}
+resource "random_uuid" "celerdata_save_storage_nonce" {
+  triggers = {
+    refresh = timestamp()
+  }
+}
+resource "time_static" "celerdata_save_storage_timestamp" {
+  triggers = {
+    refresh = timestamp()
+  }
+}
 
 data "http" "create_storage_config" {
   url    = "https://${var.celerdata_cloud_api_host}/api/quickstart/create-storage-config"
@@ -133,8 +157,16 @@ locals {
   })
 }
 
-resource "random_uuid" "celerdata_save_cluster_nonce" {}
-resource "time_static" "celerdata_save_cluster_timestamp" {}
+resource "random_uuid" "celerdata_save_cluster_nonce" {
+  triggers = {
+    refresh = timestamp()
+  }
+}
+resource "time_static" "celerdata_save_cluster_timestamp" {
+  triggers = {
+    refresh = timestamp()
+  }
+}
 
 data "http" "deploy_cluster" {
   url    = "https://${var.celerdata_cloud_api_host}/api/quickstart/deploy-cluster"
