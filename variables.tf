@@ -1,13 +1,17 @@
 variable "project_id" {
   description = "The GCP project where celerdata resources will be created."
   type        = string
-  default     = ""
 }
 
 variable "region" {
   description = "The GCP region where celerdata resources will be created."
   type        = string
-  default     = ""
+}
+
+variable "force_destroy_storage_bucket" {
+  description = "Whether the celerdata created storage bucket resource should be forcely destroyed or not."
+  type        = bool
+  default     = false
 }
 
 variable "celerdata_cluster_name" {

@@ -6,7 +6,7 @@ resource "google_project_iam_custom_role" "celerdata_created_vm_data_role" {
   description = "The cloud storage data role created by celerdata"
 
   depends_on = [
-    google_project_service.celerdata_enabled_services
+    google_compute_network.celerdata_created_network
   ]
 }
 
@@ -17,7 +17,7 @@ resource "google_service_account" "celerdata_created_vm_service_account" {
   description  = "The service account bound with VMs created by celerdata."
 
   depends_on = [
-    google_project_service.celerdata_enabled_services
+    google_compute_network.celerdata_created_network
   ]
 }
 
@@ -25,6 +25,10 @@ resource "google_project_iam_member" "celerdata_created_vm_service_account_bindi
   project = var.project_id
   member  = "serviceAccount:${google_service_account.celerdata_created_vm_service_account.email}"
   role    = google_project_iam_custom_role.celerdata_created_vm_data_role.name
+
+  depends_on = [
+    google_compute_network.celerdata_created_network
+  ]
 }
 
 resource "google_project_iam_custom_role" "celerdata_created_deployment_extra_role" {
@@ -35,7 +39,7 @@ resource "google_project_iam_custom_role" "celerdata_created_deployment_extra_ro
   description = "The cluster deployment role created by celerdata"
 
   depends_on = [
-    google_project_service.celerdata_enabled_services
+    google_compute_network.celerdata_created_network
   ]
 }
 
@@ -43,10 +47,18 @@ resource "google_project_iam_member" "celerdata_deployment_compute_admin_binding
   project = var.project_id
   member  = "serviceAccount:${var.celerdata_service_account_email}"
   role    = "roles/compute.admin"
+  
+  depends_on = [
+    google_compute_network.celerdata_created_network
+  ]
 }
 
 resource "google_project_iam_member" "celerdata_deployment_extra_binding" {
   project = var.project_id
   member  = "serviceAccount:${var.celerdata_service_account_email}"
   role    = google_project_iam_custom_role.celerdata_created_deployment_extra_role.name
+
+  depends_on = [
+    google_compute_network.celerdata_created_network
+  ]
 }
