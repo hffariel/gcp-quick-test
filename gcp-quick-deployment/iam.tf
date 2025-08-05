@@ -39,7 +39,7 @@ resource "google_project_iam_custom_role" "celerdata_created_deployment_role" {
   project     = var.project_id
   role_id     = "${replace(local.celerdata_created_resource_common_prefix, "-", "_")}"
   title       = "${replace(local.celerdata_created_resource_common_prefix, "-", "_")}_deployment_role"
-  permissions = concat(["iam.serviceAccounts.actAs", "storage.buckets.get"], google_iam_role.compute_admin_role.included_permissions)
+  permissions = concat(["iam.serviceAccounts.actAs", "storage.buckets.get"], data.google_iam_role.compute_admin_role.included_permissions)
   description = "The cluster deployment role created by celerdata"
 
   depends_on = [
