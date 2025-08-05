@@ -31,11 +31,15 @@ resource "google_project_iam_member" "celerdata_created_vm_service_account_bindi
   ]
 }
 
-resource "google_project_iam_custom_role" "celerdata_created_deployment_extra_role" {
+data "google_iam_role" "compute_admin_role" {
+  name = "roles/compute.admin"
+}
+
+resource "google_project_iam_custom_role" "celerdata_created_deployment_role" {
   project     = var.project_id
   role_id     = "${replace(local.celerdata_created_resource_common_prefix, "-", "_")}"
   title       = "${replace(local.celerdata_created_resource_common_prefix, "-", "_")}_deployment_role"
-  permissions = ["iam.serviceAccounts.actAs", "storage.buckets.get"]
+  permissions = concat(["iam.serviceAccounts.actAs", "storage.buckets.get"], google_iam_role.compute_admin_role.included_permissions)
   description = "The cluster deployment role created by celerdata"
 
   depends_on = [
@@ -43,20 +47,10 @@ resource "google_project_iam_custom_role" "celerdata_created_deployment_extra_ro
   ]
 }
 
-resource "google_project_iam_member" "celerdata_deployment_compute_admin_binding" {
+resource "google_project_iam_member" "celerdata_deployment_role_binding" {
   project = var.project_id
   member  = "serviceAccount:${var.celerdata_service_account_email}"
-  role    = "roles/compute.admin"
-  
-  depends_on = [
-    google_project_service.celerdata_enabled_services
-  ]
-}
-
-resource "google_project_iam_member" "celerdata_deployment_extra_binding" {
-  project = var.project_id
-  member  = "serviceAccount:${var.celerdata_service_account_email}"
-  role    = google_project_iam_custom_role.celerdata_created_deployment_extra_role.name
+  role    = google_project_iam_custom_role.celerdata_created_deployment_role.name
 
   depends_on = [
     google_project_service.celerdata_enabled_services
