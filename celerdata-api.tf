@@ -4,7 +4,7 @@ locals {
     credential = {
       role_arn       = var.celerdata_service_account_email
       external_id    = var.project_id
-      policy_version = 1
+      policy_version = "gcp"
     }
     quickStartUUID = local.sign_in.quickStartUUID
   })
