@@ -9,14 +9,10 @@ locals {
   })
 }
 
-resource "random_uuid" "celerdata_save_credential_nonce" {
-  triggers = {
-    refresh = timestamp()
-  }
-}
+resource "random_uuid" "celerdata_save_credential_nonce" {}
 resource "time_static" "celerdata_save_credential_timestamp" {
   triggers = {
-    refresh = timestamp()
+    refresh = local.credential_id != null ? "no" : timestamp()
   }
 }
 
@@ -54,14 +50,10 @@ locals {
   })
 }
 
-resource "random_uuid" "celerdata_save_network_nonce" {
-  triggers = {
-    refresh = timestamp()
-  }
-}
+resource "random_uuid" "celerdata_save_network_nonce" {}
 resource "time_static" "celerdata_save_network_timestamp" {
   triggers = {
-    refresh = timestamp()
+    refresh = local.net_iface_id != null ? "no" : timestamp()
   }
 }
 
@@ -99,14 +91,10 @@ locals {
   })
 }
 
-resource "random_uuid" "celerdata_save_storage_nonce" {
-  triggers = {
-    refresh = timestamp()
-  }
-}
+resource "random_uuid" "celerdata_save_storage_nonce" {}
 resource "time_static" "celerdata_save_storage_timestamp" {
   triggers = {
-    refresh = timestamp()
+    refresh = local.storage_conf_id != null ? "no" : timestamp()
   }
 }
 
@@ -157,14 +145,10 @@ locals {
   })
 }
 
-resource "random_uuid" "celerdata_save_cluster_nonce" {
-  triggers = {
-    refresh = timestamp()
-  }
-}
+resource "random_uuid" "celerdata_save_cluster_nonce" {}
 resource "time_static" "celerdata_save_cluster_timestamp" {
   triggers = {
-    refresh = timestamp()
+    refresh = local.order_id != null ? "no" : timestamp()
   }
 }
 
