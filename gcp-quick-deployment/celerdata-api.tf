@@ -26,6 +26,7 @@ resource "time_static" "celerdata_save_credential_timestamp" {
 }
 
 data "http" "create_credential" {
+  count  = (local.credential_id == null ? 1 : 0)
   url    = "https://${var.celerdata_cloud_api_host}/api/quickstart/create-credential"
   method = "POST"
   request_body = local.create_credential_request_body
@@ -70,6 +71,7 @@ resource "time_static" "celerdata_save_network_timestamp" {
 }
 
 data "http" "create_network" {
+  count  = (local.net_iface_id == null ? 1 : 0)
   url    = "https://${var.celerdata_cloud_api_host}/api/quickstart/create-network"
   method = "POST"
   request_body = local.create_network_request_body
@@ -111,6 +113,7 @@ resource "time_static" "celerdata_save_storage_timestamp" {
 }
 
 data "http" "create_storage_config" {
+  count  = (local.storage_conf_id == null ? 1 : 0)
   url    = "https://${var.celerdata_cloud_api_host}/api/quickstart/create-storage-config"
   method = "POST"
   request_body = local.create_storage_config_request_body
@@ -165,6 +168,7 @@ resource "time_static" "celerdata_save_cluster_timestamp" {
 }
 
 data "http" "deploy_cluster" {
+  count  = (local.order_id == null ? 1 : 0)
   url    = "https://${var.celerdata_cloud_api_host}/api/quickstart/deploy-cluster"
   method = "POST"
   request_body = local.deploy_cluster_request_body

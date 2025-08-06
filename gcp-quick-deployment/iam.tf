@@ -31,10 +31,6 @@ resource "google_project_iam_member" "celerdata_created_vm_service_account_bindi
   ]
 }
 
-data "google_iam_role" "compute_admin_role" {
-  name = "roles/compute.admin"
-}
-
 locals {
   celerdata_required_permissions = [
     "compute.addresses.create", "compute.addresses.delete", "compute.addresses.get", "compute.addresses.list", "compute.addresses.setLabels", "compute.addresses.use", "compute.addresses.createInternal", "compute.addresses.deleteInternal",
