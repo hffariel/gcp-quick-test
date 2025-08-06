@@ -24,5 +24,5 @@ output "celerdata_cluster_initial_admin_password" {
 }
 
 output "celerdata_cluster_preview_address" {
-  value = "https://${replace(var.celerdata_cloud_api_host, "-api", "")}/add-cluster?oid=${local.order_id}&csp=${local.csp_id}" 
+  value = local.order_id == "" ? "" : "https://${replace(var.celerdata_cloud_api_host, "-api", "")}/add-cluster?oid=${local.order_id}&csp=${local.csp_id}" 
 }
