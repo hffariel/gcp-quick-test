@@ -33,7 +33,7 @@ resource "google_project_iam_member" "celerdata_created_vm_service_account_bindi
 
 locals {
   celerdata_required_permissions = [
-    "compute.addresses.create", "compute.addresses.delete", "compute.addresses.get", "compute.addresses.list", "compute.addresses.setLabels", "compute.addresses.use", "compute.addresses.createInternal", "compute.addresses.deleteInternal",
+    "compute.addresses.create", "compute.addresses.delete", "compute.addresses.get", "compute.addresses.list", "compute.addresses.setLabels", "compute.addresses.use", "compute.addresses.useInternal", "compute.addresses.createInternal", "compute.addresses.deleteInternal",
     "compute.globalAddresses.create", "compute.globalAddresses.delete", "compute.globalAddresses.get", "compute.globalAddresses.list", "compute.globalAddresses.setLabels", "compute.globalAddresses.use",
     "compute.backendServices.create", "compute.backendServices.delete", "compute.backendServices.get", "compute.backendServices.list", "compute.backendServices.update", "compute.backendServices.use",
     "compute.regionBackendServices.create", "compute.regionBackendServices.delete", "compute.regionBackendServices.get", "compute.regionBackendServices.list", "compute.regionBackendServices.update", "compute.regionBackendServices.use",
