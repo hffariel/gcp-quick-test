@@ -37,7 +37,7 @@ data "google_iam_role" "compute_admin_role" {
 
 locals {
   celerdata_required_permissions = [
-    "compute.addresses.create", "compute.addresses.delete", "compute.addresses.get", "compute.addresses.list", "compute.addresses.setLabels", "compute.addresses.use",
+    "compute.addresses.create", "compute.addresses.delete", "compute.addresses.get", "compute.addresses.list", "compute.addresses.setLabels", "compute.addresses.use", "compute.addresses.createInternal", "compute.addresses.deleteInternal",
     "compute.globalAddresses.create", "compute.globalAddresses.delete", "compute.globalAddresses.get", "compute.globalAddresses.list", "compute.globalAddresses.setLabels", "compute.globalAddresses.use",
     "compute.backendServices.create", "compute.backendServices.delete", "compute.backendServices.get", "compute.backendServices.list", "compute.backendServices.update", "compute.backendServices.use",
     "compute.regionBackendServices.create", "compute.regionBackendServices.delete", "compute.regionBackendServices.get", "compute.regionBackendServices.list", "compute.regionBackendServices.update", "compute.regionBackendServices.use",
