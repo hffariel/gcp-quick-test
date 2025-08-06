@@ -51,7 +51,7 @@ data "http" "create_credential" {
 
 locals {
   credential_response         = jsondecode(data.http.create_credential.response_body)
-  credential_id               = local.credential_response.data == null ? "" : local.credential_response.data.credentialId
+  credential_id               = try(local.credential_response.data.credentialId, "")
   create_network_request_body = jsonencode({
     networkInterface = {
       subnet_id         = google_compute_subnetwork.celerdata_created_subnetwork.name
@@ -92,7 +92,7 @@ data "http" "create_network" {
 
 locals {
   network_response                   = jsondecode(data.http.create_network.response_body)
-  net_iface_id                       = local.network_response.data == null ? "" : local.network_response.data.netIfaceId
+  net_iface_id                       = try(local.network_response.data.netIfaceId, "")
   create_storage_config_request_body = jsonencode({
     storage_conf = {
       bucket_name          = replace(google_storage_bucket.celerdata_created_data_bucket.url, "gs://", "")
@@ -145,7 +145,7 @@ resource "random_password" "celerdata_cluster_initial_admin_password" {
 
 locals {
   storage_config_response     = jsondecode(data.http.create_storage_config.response_body)
-  storage_conf_id             = local.storage_config_response.data == null ? "" : local.storage_config_response.data.storageConfigId
+  storage_conf_id             = try(local.storage_config_response.data.storageConfigId, "")
   deploy_cluster_request_body = jsonencode({
     cluster_name          = var.celerdata_cluster_name
     credential_id         = local.credential_id
@@ -187,6 +187,6 @@ data "http" "deploy_cluster" {
 
 locals {
   deploy_cluster_response = jsondecode(data.http.deploy_cluster.response_body)
-  order_id                = local.deploy_cluster_response.data == null ? "" : local.deploy_cluster_response.data.orderId
-  csp_id                  = local.deploy_cluster_response.data == null ? "" : local.deploy_cluster_response.data.cspId
+  order_id                = try(local.deploy_cluster_response.data.orderId, "")
+  csp_id                  = try(local.deploy_cluster_response.data.cspId, "")
 }
