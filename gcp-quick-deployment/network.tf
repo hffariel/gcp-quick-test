@@ -36,6 +36,22 @@ resource "google_compute_firewall" "celerdata_created_firewall_rule_allow_intern
   }
 }
 
+resource "google_compute_firewall" "celerdata_created_firewall_rule_allow_external_ingress" {
+  project         = var.project_id
+  name            = "${local.celerdata_created_resource_common_prefix}-allow-external-ingress"
+  network         = google_compute_network.celerdata_created_network.self_link
+  direction       = "INGRESS"
+  priority        = 10
+  source_ranges   = ["0.0.0.0/0"]
+  target_tags     = [local.celerdata_cluster_network_tag]
+  description = "The rule for allowing external traffic from celerdata managed resources."
+
+  allow {
+    protocol = "tcp"
+    ports = ["443", "9030"]
+  }
+}
+
 resource "google_compute_firewall" "celerdata_created_firewall_rule_allow_internal_egress" {
   project              = var.project_id
   name                 = "${local.celerdata_created_resource_common_prefix}-allow-internal-egress"
