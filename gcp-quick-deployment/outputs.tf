@@ -19,7 +19,7 @@ output "celerdata_cluster_network_tag" {
 }
 
 output "celerdata_cluster_initial_admin_password" {
-  value = random_password.celerdata_cluster_initial_admin_password.result
+  value = local.order_id == "" ? "" : random_password.celerdata_cluster_initial_admin_password.result
   sensitive = true
 }
 

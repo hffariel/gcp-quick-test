@@ -187,6 +187,6 @@ data "http" "deploy_cluster" {
 
 locals {
   deploy_cluster_response = jsondecode(data.http.deploy_cluster.response_body)
-  order_id                = local.deploy_cluster.data == null ? "" : local.deploy_cluster_response.data.orderId
-  csp_id                  = local.deploy_cluster.data == null ? "" : local.deploy_cluster_response.data.cspId
+  order_id                = local.deploy_cluster_response.data == null ? "" : local.deploy_cluster_response.data.orderId
+  csp_id                  = local.deploy_cluster_response.data == null ? "" : local.deploy_cluster_response.data.cspId
 }
