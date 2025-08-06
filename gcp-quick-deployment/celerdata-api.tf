@@ -70,7 +70,7 @@ resource "time_static" "celerdata_save_network_timestamp" {
 }
 
 data "http" "create_network" {
-  count  = (local.credential_id == "" ? 1 : 0)
+  count  = (local.credential_id == "" ? 0 : 1)
   url    = "https://${var.celerdata_cloud_api_host}/api/quickstart/create-network"
   method = "POST"
   request_body = local.create_network_request_body
@@ -92,7 +92,7 @@ data "http" "create_network" {
 }
 
 locals {
-  network_response                   = local.credential_id == "" ? jsondecode(data.http.create_network[0].response_body)
+  network_response                   = jsondecode(local.credential_id == "" ? "{}" : data.http.create_network[0].response_body)
   net_iface_id                       = local.network_response.data == null ? "" : local.network_response.data.netIfaceId
   create_storage_config_request_body = jsonencode({
     storage_conf = {
@@ -112,7 +112,7 @@ resource "time_static" "celerdata_save_storage_timestamp" {
 }
 
 data "http" "create_storage_config" {
-  count  = (local.credential_id == "" ? 1 : 0)
+  count  = (local.credential_id == "" ? 0 : 1)
   url    = "https://${var.celerdata_cloud_api_host}/api/quickstart/create-storage-config"
   method = "POST"
   request_body = local.create_storage_config_request_body
@@ -146,7 +146,7 @@ resource "random_password" "celerdata_cluster_initial_admin_password" {
 }
 
 locals {
-  storage_config_response     = local.credential_id == "" ? jsondecode(data.http.create_storage_config[0].response_body)
+  storage_config_response     = jsondecode(local.credential_id == "" ? "{}" : data.http.create_storage_config[0].response_body)
   storage_conf_id             = local.storage_config_response.data == null ? "" : local.storage_config_response.data.storageConfigId
   deploy_cluster_request_body = jsonencode({
     cluster_name          = var.celerdata_cluster_name
@@ -167,7 +167,7 @@ resource "time_static" "celerdata_save_cluster_timestamp" {
 }
 
 data "http" "deploy_cluster" {
-  count  = (local.credential_id == "" ? 1 : 0)
+  count  = (local.credential_id == "" ? 0 : 1)
   url    = "https://${var.celerdata_cloud_api_host}/api/quickstart/deploy-cluster"
   method = "POST"
   request_body = local.deploy_cluster_request_body
@@ -189,7 +189,7 @@ data "http" "deploy_cluster" {
 }
 
 locals {
-  deploy_cluster_response = local.credential_id == "" ? jsondecode(data.http.deploy_cluster[0].response_body)
+  deploy_cluster_response = jsondecode(local.credential_id == "" ? "{}" : data.http.deploy_cluster[0].response_body)
   order_id                = local.deploy_cluster_response.data == null ? "" : local.deploy_cluster_response.data.orderId
   csp_id                  = local.deploy_cluster_response.data == null ? "" : local.deploy_cluster_response.data.cspId
 }
