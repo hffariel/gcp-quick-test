@@ -7,5 +7,5 @@ data "google_service_accounts" "example" {
 }
 
 output "test" {
-  value = data.google_service_accounts.example[0].email
+  value = data.google_service_accounts.example.accounts[0].email
 }
